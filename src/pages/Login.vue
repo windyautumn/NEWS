@@ -20,6 +20,7 @@
      <div>
      <AuthInput 
      placeholder="请输入密码"
+     type="password"
      v-model="form.password"
      :rule="/^[0-9A-Za-z]{3,10}$/"
      err_message="密码格式错误"
@@ -68,7 +69,9 @@ export default {
       }).then(res=>{
         let {message} = res.data
         if(message === '登录成功'){
-          thisd.$router.push('/')
+          localStorage.setItem("token", res.data.data.token)
+          localStorage.setItem("user_id", res.data.data.user.id)
+          this.$router.push('/personal')
         }
       })
     }
