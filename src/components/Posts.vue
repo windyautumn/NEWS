@@ -12,18 +12,24 @@
             </p>
             </div>
             <div class="post-right">
-                <img :src="post.cover[0].url" alt="">
+                <router-link :to="'/post_detail/'+ post.id">
+                    <img :src="post.cover[0].url" alt="">
+                </router-link>
             </div>
        </div>
        <!-- 多张图片 -->
        <div class="imgs" v-if="post.cover.length>=3">
             <div class="imgs-left">
-                <div class="title">{{post.title}}</div>
+                <router-link :to="'/post_detail/'+ post.id">
+                    <div class="title">{{post.title}}</div>
+                </router-link>
                 
             </div>
-            <div class="imgs-right">
-                <img :src="item.url" v-for="(item,index) in post.cover" :key="index" v-if="index<3">
-            </div>
+            <router-link :to="'/post_detail/'+ post.id">
+                <div class="imgs-right">
+                    <img :src="item.url" v-for="(item,index) in post.cover" :key="index" v-if="index<3">
+                </div>
+            </router-link>
             <p>
                 <span>{{post.user.nickname}}</span>
                 <i>{{post.comment_length}}跟帖</i>
@@ -32,11 +38,15 @@
         <!-- 视屏 -->
         <div class="video" v-if="post.type===2">
             <div class="video-left">
-                <div class="title">{{post.title}}</div>
+                <router-link :to="'/post_detail/'+ post.id">
+                    <div class="title">{{post.title}}</div>
+                </router-link>
                 
             </div>
             <div class="video-right">
-                <img :src="post.cover[0].url" >
+                <router-link :to="'/post_detail/'+ post.id">
+                    <img :src="post.cover[0].url" >
+                </router-link>   
                 <span class="videobo">
                     <i class="iconfont iconshipin"></i>
                 </span>
