@@ -20,6 +20,18 @@
           </div>
       </div>
       <div class="video" v-if="post.type ===2">
+           <div class="post-head">
+              <div class="head-left">
+                  <span class="iconfont iconjiantou2" @click="$router.back()"></span>
+                  <span class="iconfont iconnew"></span>
+              </div>
+              <span class="foucs" v-if="!post.has_follow" @click="handleFollow">
+                  关注
+              </span>
+              <span class="unfoucs" v-if="post.has_follow" @click="handleUnfollow">
+                  已关注
+              </span>
+          </div>
           <video 
         src="https://video.pearvideo.com/mp4/adshort/20190927/cont-1607446-14434032_adpkg-ad_hd.mp4"
         class="video"
@@ -31,13 +43,8 @@
                 <img :src="$axios.defaults.baseURL + post.user.head_img" >
                 <span>{{post.user.nickname}}</span>
             </div>
-             <span class="foucs" v-if="!post.has_follow" @click="handleFollow">
-                  关注
-              </span>
-              <span class="unfoucs" v-if="post.has_follow" @click="handleUnfollow">
-                  已关注
-              </span>
         </div>
+        <h3>{{post.title}}</h3>
       </div>
         <div class="post-btns">
               <span :class="{active:post.has_like}" @click="handleLike">
@@ -128,7 +135,6 @@ export default {
         }
         this.$axios(config).then(res=>{
            const {data} = res.data
-           console.log(data)
            this.post = data
         })
     }
@@ -144,7 +150,21 @@ export default {
                 max-width: 100%
             }
         }
-        .post-head{
+        
+        h3{
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .post-info{
+            font-size: 12px;
+            color:#999;
+            margin-bottom: 10px;
+        }
+        .content{
+            line-height: 1.5;
+        }
+    }
+    .post-head{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -167,19 +187,6 @@ export default {
             }
            
         }
-        h3{
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-        .post-info{
-            font-size: 12px;
-            color:#999;
-            margin-bottom: 10px;
-        }
-        .content{
-            line-height: 1.5;
-        }
-    }
     .post-btns{
         margin-top: 20px;
         display: flex;
@@ -205,6 +212,10 @@ export default {
     }
     .video{
         width: 100%;
+        margin-top: 20/360*100vw;
+        h3{
+            padding: 10px;
+        }
         .video-info{
         display: flex;
         justify-content: space-between;

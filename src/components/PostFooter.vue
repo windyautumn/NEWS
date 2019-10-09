@@ -2,7 +2,9 @@
   <div class="post-footer">
     <div class="footert" v-show="!isFocus">
       <input type="text" placeholder="写跟帖" @focus="handleFocus" />
-      <span class="comment">
+      
+      
+      <span class="comment" @click="$router.push(`/post_comment/${post.id}`)">
         <em>1020</em>
         <i class="iconfont iconpinglun-"></i>
       </span>

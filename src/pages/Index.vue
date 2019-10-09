@@ -24,7 +24,7 @@
           @load="onLoad"
           :immediate-check="false"
         >
-          <Posts v-for="(item,index) in item.posts" :key="index" :post="item" />
+          <Posts v-for="(item,index) in item.posts" :key="index" :post="item" v-if="item.open===1"/>
         </van-list>
       </van-tab>
     </van-tabs>
@@ -34,6 +34,7 @@
 <script>
 import Posts from "@/components/Posts";
 export default {
+  name: "index",
   data() {
     return {
       active: localStorage.getItem("token") ? 1 : 0,
@@ -70,7 +71,6 @@ export default {
           ];
           this.categories[this.active].pageIndex++;
           this.categories[this.active].loading = false;
-          console.log(123);
         });
       }, 2000);
     }
